@@ -46,7 +46,7 @@
 
 %
 % The "title" command has an optional parameter, allowing the author to define a "short title" to be used in page headers.
-\title{Energy Market Price Forecasting with Neural Networks}
+\title{Stochastic Energy Market Price Forecasting with Neural Networks}
 
 %
 % The "author" command and its associated commands are used to define the authors and their affiliations.
@@ -76,7 +76,7 @@
 % ============================================================================================================================= %
 % The abstract is a short summary of the work to be presented in the article.
 \begin{abstract}
-This project proposes to construct a neural network that will forecast energy prices in the California Independent System Operator (CISO). Accurate forecasting of energy prices in the CISO provides an economic opportunity for energy providers incur profit and buyers to purchase as the lowest possible price. Traditional methods for forecasting have been used for many years to forecast these prices, but the recent advances in neural network time series forecasting presents a possible way to improve upon existing methods. The problem statement of this project is how to design a neural network to accurately predict 
+This project proposes to construct a neural network that will forecast energy prices in the California Independent System Operator (CISO). Accurate forecasting of energy prices in the CISO provides an economic opportunity for energy providers to incur profit and buyers to purchase at the lowest possible price. Traditional methods for forecasting have been used for many years to forecast these prices, but the recent advances in neural network time series forecasting presents a possible way to improve upon existing methods. The problem statement of this project is how to design a neural network to accurately predict stochastic energy prices.
 \end{abstract}
 
 %
@@ -116,7 +116,7 @@ This project proposes to construct a neural network that will forecast energy pr
 %
 % Keywords. The author(s) should pick words that accurately describe the work being
 % presented. Separate the keywords with commas.
-\keywords{machine learning, forecasting, neural networks, energy markets}
+\keywords{machine learning, stochastic forecasting, neural networks, energy markets}
 
 %
 % A "teaser" image appears between the author and affiliation information and the body 
@@ -138,21 +138,44 @@ This project proposes to construct a neural network that will forecast energy pr
 % ============================================================================================================================= %
 
 \section{Introduction}
+
+Instructions:
 \begin{itemize}
     \item Provide motivation to the project topic. That is tell the reader about why you want to work on this topic. Set the context and objective of the project here. 
     \item Frame the problem statement and/or the research question for your project.
     \item Summarize the contributions of your work, that is explicitly state what the expected outcomes will be. 
 \end{itemize}
-	
 
+Outline:
+\begin{itemize}
+	\item Large population of California depends on energy market every day.
+	\item Problem is interesting because it is data rich, and quite complex.
+	\item The basic economic principle of buy-low sell-high allows a natural economic opportunity that arises to participate in the energy market with accurate forecasts.
+	\item Modern advances in neural networks have shown good results in time-series forecasting (references).
+	\item For the previous reason, we believe we can use neural networks to predict energy prices.
+	\item Problem statement: how to construct a neural network that accurately predicts stochastic, periodic prices in the CISO.
+	\item To answer this problem statement we will:
+	\begin{itemize}
+		\item Build a time-series forecasting neural network.
+		\item Benchmark the NN against existing research.
+		\item We expect that a NN will perform at a higher level than existing traditional methods. 
+	\end {itemize}
+\end{itemize}
+	
 % ============================================================================================================================= %
 %														Approach																       %
 % ============================================================================================================================= %
 
 \section{Approach}
+Instructions:
 \begin{itemize}
     \item Briefly describe your proposed approach here
     \item Discuss what methods you will use and why
+\end{itemize}
+
+Outline:
+\begin{itemize}
+	\item 
 \end{itemize}
 
 % ============================================================================================================================= %
@@ -160,10 +183,7 @@ This project proposes to construct a neural network that will forecast energy pr
 % ============================================================================================================================= %
 
 \subsection{Data Sources}
-\begin{itemize}
-    \item Describe your plan to procure the data
-    \item Discuss what methods you will use and why
-\end{itemize}
+The dataset for this project was kindly provided by the Dowling Lab for Uncertainty Quantification and Mathematical Optimization at the University of Notre Dame in the Department of Chemical and Biomolecular Engineering. The dataset is comprised of over 6500 energy vendors, called nodes, participating in the California ISO. There is a full year's worth of data for each node in 2015, and price measurements are recorded at 1 hour, 15 minute, and 5 minute intervals. Latitude and longitude coordinates are known for around 2000 of these nodes for visualization purposes. 
 
 % ============================================================================================================================= %
 %														Evaluation Plan															       %
@@ -171,9 +191,19 @@ This project proposes to construct a neural network that will forecast energy pr
 
 \section{Evaluation Plan}
 
+Instructions:
 \begin{itemize}
     \item How will you evaluate the proposed work?
     \item What does success mean for the class project?
+\end{itemize}
+
+Outline:
+\begin{itemize}
+    \item Evaluate vs. literature values.
+    \item Split dataset into training and testing sets.
+    \item Compare CPU time with current methods in literature.
+    \item Success would be building a neural network that forecasts prices of energy markets. 
+    \item Success is not if the NN beats traditional methods, but rather the testing of a new method. 
 \end{itemize}
 
 % ============================================================================================================================= %
