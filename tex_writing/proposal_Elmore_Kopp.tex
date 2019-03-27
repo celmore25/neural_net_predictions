@@ -44,9 +44,11 @@
 % end of the preamble, start of the body of the document source.
 \begin{document}
 
+%\bibliography{/Users/ClayElmore/Desktop/mendeley/DMD_Literature.bib}
+
 %
 % The "title" command has an optional parameter, allowing the author to define a "short title" to be used in page headers.
-\title{Stochastic Energy Market Price Forecasting with Neural Networks}
+\title{Stochastic Energy Market Price Forecasting with Recurrent Neural Networks}
 
 %
 % The "author" command and its associated commands are used to define the authors and their affiliations.
@@ -76,7 +78,7 @@
 % ============================================================================================================================= %
 % The abstract is a short summary of the work to be presented in the article.
 \begin{abstract}
-This project proposes to construct a neural network that will forecast energy prices in the California Independent System Operator (CISO). Accurate forecasting of energy prices in the CISO provides an economic opportunity for energy providers to incur profit and buyers to purchase at the lowest possible price. Traditional methods for forecasting have been used for many years to forecast these prices, but the recent advances in neural network time series forecasting presents a possible way to improve upon existing methods. The problem statement of this project is how to design a neural network to accurately predict stochastic energy prices.
+This project proposes to construct a neural network that will forecast energy prices in the California Independent System Operator (CAISO). Accurate forecasting of energy prices in the CISO provides an economic opportunity for energy providers to incur profit and buyers to purchase at the lowest possible price. Traditional methods for forecasting have been used for many years to forecast these prices, but the recent advances in recurrent neural network time series forecasting presents a possible way to improve upon existing methods. The problem statement of this project is how to design a neural network to accurately predict stochastic energy prices.
 \end{abstract}
 
 %
@@ -139,34 +141,30 @@ This project proposes to construct a neural network that will forecast energy pr
 
 \section{Introduction}
 
-Instructions:
-\begin{itemize}
-    \item Provide motivation to the project topic. That is tell the reader about why you want to work on this topic. Set the context and objective of the project here. 
-    \item Frame the problem statement and/or the research question for your project.
-    \item Summarize the contributions of your work, that is explicitly state what the expected outcomes will be. 
-\end{itemize}
+%Outline:
+%\begin{itemize}
+%	\item Large population of California depends on energy market every day\cite{Dowling2017}.
+%	\item Problem is interesting because it is data rich, and quite complex.
+%	\item The basic economic principle of buy-low sell-high allows a natural economic opportunity that arises to participate in the energy market with accurate forecasts.
+%	\item Modern advances in neural networks have shown good results in time-series forecasting (references).
+%	\item For the previous reason, we believe we can use neural networks to predict energy prices.
+%	\item Problem statement: how to construct a neural network that accurately predicts stochastic, periodic prices in the CISO.
+%	\item To answer this problem statement we will:
+%	\begin{itemize}
+%		\item Build a time-series forecasting neural network.
+%		\item Benchmark the NN against existing research.
+%		\item We expect that a NN will perform at a higher level than existing traditional methods. 
+%	\end {itemize}
+%\end{itemize}
 
-Outline:
-\begin{itemize}
-	\item Large population of California depends on energy market every day.
-	\item Problem is interesting because it is data rich, and quite complex.
-	\item The basic economic principle of buy-low sell-high allows a natural economic opportunity that arises to participate in the energy market with accurate forecasts.
-	\item Modern advances in neural networks have shown good results in time-series forecasting (references).
-	\item For the previous reason, we believe we can use neural networks to predict energy prices.
-	\item Problem statement: how to construct a neural network that accurately predicts stochastic, periodic prices in the CISO.
-	\item To answer this problem statement we will:
-	\begin{itemize}
-		\item Build a time-series forecasting neural network.
-		\item Benchmark the NN against existing research.
-		\item We expect that a NN will perform at a higher level than existing traditional methods. 
-	\end {itemize}
-\end{itemize}
-	
+The California Independent System Operator (CAISO) is an enormous, complex energy market system in which energy buyers and sellers schedule a multitude of energy related transactions. The CAISO had some 40 billion dollars in sales, and more than 260,000 gigawatts sold in 2015\cite{CAenergy2}. This makes for a data-rich problem worthy for study by academics and industry professionals alike. A particularly interesting problem in the CAISO is the forecasting of Day-Ahead Market (DAM) prices which are notoriously stochastic. DAM prices are used to forecast energy prices a day in advance which energy buyers and sellers then use to schedule when they will buy and sell energy on the CAISO market. It has been shown that accurate forecasting is absolutely critical to profiting off DAM market prices\cite{Dowling2017}.\\
+Recent advances in recurrent neural networks (RNN) for time series learning suggest that RNN's could be a potential way to produce more accurate forecasts of energy prices. In this project, we propose to build a RNN that can accurately predict stochastic energy prices in the CAISO across various energy providers. In order to evaluate this challenge, we will compare against reported literature values of standard time series forecasting such as backcasting and ARIMA predictions\cite{Conejo2005a}. Do to the recent success of RNN's, we expect an RNN to perform as well or better than current methods. 
+
 % ============================================================================================================================= %
 %														Approach																       %
 % ============================================================================================================================= %
 
-\section{Approach}
+\section{Approach (Grace)}
 Instructions:
 \begin{itemize}
     \item Briefly describe your proposed approach here
@@ -183,34 +181,36 @@ Outline:
 % ============================================================================================================================= %
 
 \subsection{Data Sources}
-The dataset for this project was kindly provided by the Dowling Lab for Uncertainty Quantification and Mathematical Optimization at the University of Notre Dame in the Department of Chemical and Biomolecular Engineering. The dataset is comprised of over 6500 energy vendors, called nodes, participating in the California ISO. There is a full year's worth of data for each node in 2015, and price measurements are recorded at 1 hour, 15 minute, and 5 minute intervals. Latitude and longitude coordinates are known for around 2000 of these nodes for visualization purposes. 
+The dataset for this project was kindly provided by the Dowling Lab for Uncertainty Quantification and Mathematical Optimization at the University of Notre Dame in the Department of Chemical and Biomolecular Engineering. The dataset is comprised of over 6500 energy vendors, called nodes, participating in the CAISO. There is a full year's worth of data for each node in 2015, and price measurements are recorded at 1 hour intervals. Latitude and longitude coordinates are known for around 2000 of these nodes for visualization purposes.
 
 % ============================================================================================================================= %
 %														Evaluation Plan															       %
 % ============================================================================================================================= %
 
-\section{Evaluation Plan}
+\section{Evaluation Plan (Clay)}
 
-Instructions:
-\begin{itemize}
-    \item How will you evaluate the proposed work?
-    \item What does success mean for the class project?
-\end{itemize}
+%Instructions:
+%\begin{itemize}
+%    \item How will you evaluate the proposed work?
+%    \item What does success mean for the class project?
+%\end{itemize}
+%
+%Outline:
+%\begin{itemize}
+%    \item Evaluate vs. literature values.
+%    \item Split dataset into training and testing sets.
+%    \item Compare CPU time with current methods in literature.
+%    \item Success would be building a neural network that forecasts prices of energy markets. 
+%    \item Success is not if the NN beats traditional methods, but rather the testing of a new method. 
+%\end{itemize}
 
-Outline:
-\begin{itemize}
-    \item Evaluate vs. literature values.
-    \item Split dataset into training and testing sets.
-    \item Compare CPU time with current methods in literature.
-    \item Success would be building a neural network that forecasts prices of energy markets. 
-    \item Success is not if the NN beats traditional methods, but rather the testing of a new method. 
-\end{itemize}
+Fortunately, there is a lot of published work on forecasting DAM markets, so evaluation of our RNN will be somewhat easy to compare with reported literature accuracies. Furthermore, the DAM dataset that was provided is sufficiently large enough to test our RNN's performance on a large amount of geographically separated nodes while still having enough training data to fully learn DAM dynamics. Furthermore, it will be important to evaluate the CPU time needed to train our RNN. CPU time can easily be compared with existing literature values reported. We have determined that success for this project will be defined as the successful implementation of a RNN that forecasts DAM prices in the CAISO. However, as time is somewhat limited for this project, success is not going to be defined as constructing a RNN that performs as well or better than current time-series forecasting methods.  
 
 % ============================================================================================================================= %
 %													Implementation Plan															       %
 % ============================================================================================================================= %
 
-\section{Project Implementation Plan}
+\section{Project Implementation Plan (Grace)}
 Instructions:\\
 How do you plan to implement your project and achieve the outcomes, including validation plan? Specify your deliverables on different milestones, draft, and deliverable. 
 
@@ -236,11 +236,12 @@ Outline:
     \item Here provide the relevant references for your work. 
 \end{itemize}
 	
-\emph{Use the standard Communications of the ACM format for references --- that is, a numbered list at the end of the article, ordered alphabetically by first author, and referenced by numbers in brackets~\cite{anderson1992social}. See the examples of citations at the end of this document. Within this template file, use the style named references for the text of your citation.}
+\emph{Use the standard Communications of the ACM format for references --- that is, a numbered list at the end of the article, ordered alphabetically by first author, and referenced by numbers in brackets~. See the examples of citations at the end of this document. Within this template file, use the style named references for the text of your citation.}
 
 \emph{References should be published materials accessible to the public. Internal technical reports may be cited only if they are easily accessible (i.e. you can give the address to obtain the report within your citation) and may be obtained by any reader. Proprietary information may not be cited. Private communications should be acknowledged, not referenced  (e.g., ``[Robertson, personal communication]").}
 
 
 \bibliographystyle{ACM-Reference-Format}
-\bibliography{acmart.bib}
+%\bibliography{acmart.bib}
+\bibliography{/Users/ClayElmore/Desktop/mendeley/DMD_Literature.bib}
 \end{document}

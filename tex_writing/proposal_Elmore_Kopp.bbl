@@ -1,0 +1,88 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{3}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{California}{California}{[n. d.]}]%
+        {CAenergy2}
+\bibfield{author}{\bibinfo{person}{California}.} \bibinfo{year}{[n.
+  d.]}\natexlab{}.
+\newblock \bibinfo{title}{{EIA - State Electricity Profiles}}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://www.eia.gov/electricity/state/california/}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Conejo, Contreras, Esp{\'{i}}nola, and
+  Plazas}{Conejo et~al\mbox{.}}{2005}]%
+        {Conejo2005a}
+\bibfield{author}{\bibinfo{person}{Antonio~J. Conejo}, \bibinfo{person}{Javier
+  Contreras}, \bibinfo{person}{Rosa Esp{\'{i}}nola}, {and}
+  \bibinfo{person}{Miguel~A. Plazas}.} \bibinfo{year}{2005}\natexlab{}.
+\newblock \showarticletitle{{Forecasting electricity prices for a day-ahead
+  pool-based electric energy market}}.
+\newblock \bibinfo{journal}{\emph{International Journal of Forecasting}}
+  \bibinfo{volume}{21}, \bibinfo{number}{3} (\bibinfo{date}{jul}
+  \bibinfo{year}{2005}), \bibinfo{pages}{435--462}.
+\newblock
+\showISSN{0169-2070}
+\urldef\tempurl%
+\url{https://doi.org/10.1016/J.IJFORECAST.2004.12.005}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Dowling, Kumar, and Zavala}{Dowling
+  et~al\mbox{.}}{2017}]%
+        {Dowling2017}
+\bibfield{author}{\bibinfo{person}{Alexander~W. Dowling},
+  \bibinfo{person}{Ranjeet Kumar}, {and} \bibinfo{person}{Victor~M. Zavala}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{{A multi-scale optimization framework for
+  electricity market participation}}.
+\newblock \bibinfo{journal}{\emph{Applied Energy}}  \bibinfo{volume}{190}
+  (\bibinfo{date}{mar} \bibinfo{year}{2017}), \bibinfo{pages}{147--164}.
+\newblock
+\showISSN{0306-2619}
+\urldef\tempurl%
+\url{https://doi.org/10.1016/J.APENERGY.2016.12.081}
+\showDOI{\tempurl}
+
+
+\end{thebibliography}
