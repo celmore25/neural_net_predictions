@@ -158,23 +158,17 @@ This project proposes to construct a neural network that will forecast energy pr
 %\end{itemize}
 
 The California Independent System Operator (CAISO) is an enormous, complex energy market system in which energy buyers and sellers schedule a multitude of energy related transactions. The CAISO had some 40 billion dollars in sales, and more than 260,000 gigawatts sold in 2015\cite{CAenergy2}. This makes for a data-rich problem worthy for study by academics and industry professionals alike. A particularly interesting problem in the CAISO is the forecasting of Day-Ahead Market (DAM) prices which are notoriously stochastic. DAM prices are used to forecast energy prices a day in advance which energy buyers and sellers then use to schedule when they will buy and sell energy on the CAISO market. It has been shown that accurate forecasting is absolutely critical to profiting off DAM market prices\cite{Dowling2017}.\\
-Recent advances in recurrent neural networks (RNN) for time series learning suggest that RNN's could be a potential way to produce more accurate forecasts of energy prices. In this project, we propose to build a RNN that can accurately predict stochastic energy prices in the CAISO across various energy providers. In order to evaluate this challenge, we will compare against reported literature values of standard time series forecasting such as backcasting and ARIMA predictions\cite{Conejo2005a}. Do to the recent success of RNN's, we expect an RNN to perform as well or better than current methods. 
+Recent advances in recurrent neural networks (RNN) for time series learning suggest that RNN's could be a potential way to produce more accurate forecasts of energy prices. In this project, we propose to build a RNN that can accurately predict stochastic energy prices in the CAISO across various energy providers. In order to evaluate this challenge, we will compare against reported literature values of standard time series forecasting such as backcasting and ARIMA predictions\cite{Conejo2005a}. Due to the recent success of RNN's, we expect an RNN to perform as well or better than current methods. 
 
 % ============================================================================================================================= %
 %														Approach																       %
 % ============================================================================================================================= %
 
-\section{Approach (Grace)}
-Instructions:
-\begin{itemize}
-    \item Briefly describe your proposed approach here
-    \item Discuss what methods you will use and why
-\end{itemize}
+\section{Approach}
+Because the dataset contains sequential information in the form of energy prices at different time increments, a recurrent neural network would be well suited to predicting future prices for this problem. This is because unlike in traditional neural networks, in recurrent neural networks there are loops that allow information about previous inputs to persist. In other words, it can use its memory from a previous time step to make a decision in a future time step. This is essential when working with time series data where order and contextual information is extremely important for accuracy.
+At a high level, the proposed model would utilize long short-term memory recurrent neural network architecture. Long short-term memory networks are ideal for making time series predictions because they allow the model to decide what information to keep and what information to forget. This allows them to deal with gaps of unknown duration between notable events in a time series.
+Our network will accept an input vector of past time series values and then return an output vector of predicted prices over the next 48 hours. 
 
-Outline:
-\begin{itemize}
-	\item 
-\end{itemize}
 
 % ============================================================================================================================= %
 %														Data Sources															       %
@@ -210,22 +204,14 @@ Fortunately, there is a lot of published work on forecasting DAM markets, so eva
 %													Implementation Plan															       %
 % ============================================================================================================================= %
 
-\section{Project Implementation Plan (Grace)}
-Instructions:\\
-How do you plan to implement your project and achieve the outcomes, including validation plan? Specify your deliverables on different milestones, draft, and deliverable. 
+\section{Project Implementation Plan}
+By the first milestone on April 7th, we plan to have our data split into training, testing, and validation sets. We also will solidify the initial architecture of our neural network and begin to implement it on a small scale in a Jupyter Notebook in order to identify roadblocks as soon as possible. 
 
-Outline:
-\begin{itemize}
-    	\item Milestone 1: Initial architecture of NN identified and implemented on a small scale for forecasting (Jupyter Notebook).
-    	\item Milestone 2: Implementation of NN across all nodes in dataset and error analysis performed (Jupyter Notebook).
-	\item Paper draft 
-	\item Final deliverable: Paper detailing the implementation of a NN for energy price forecasting with reproducible code as well. 
-   	\item What does success mean for the class project?
-	\begin{itemize}
-		\item Success would be building a neural network that forecasts prices of energy markets. 
-		\item Success is not if the NN beats traditional methods, but rather the testing of a new method. 
-	\end{itemize}
-\end{itemize}
+By the second milestone on April 17th, we plan to extend our implementation across all of the nodes in our data set. We will also perform error analysis to evaluate our work and make any changes necessary from those results. 
+
+By April 27th we will turn in our paper drafts for peer review with detailed analysis of our findings from the first and second milestones.
+
+On May 5th, we will turn in our final paper with edits based on peer feedback and any model developments. This paper will outline the implementation of a neural net for energy forecasting. We will also turn in reproducible code to verify our findings. 
 
 % ============================================================================================================================= %
 %														References															       %
