@@ -22,12 +22,21 @@ class RNN(object):
     ''' load data into usable objects '''
     def load_data(self, data, frac_train, show_graph):
         dataframe = pd.read_csv(data)
-        self.dataset = dataframe.values[0]
-        self.dataset = self.dataset.astype('float32') 
-        self.split_train_test(frac_train)
-        print('Training:',len(self.train), '\tTesting:',len(self.test))
-        if show_graph:
-            self.display_data()
+        print(len(dataframe.values))
+        i = 0
+        for value in dataframe.values:
+            if i == 50:
+                break
+            i += 1
+            self.dataset = value
+            self.dataset = self.dataset.astype('float32') 
+            self.split_train_test(frac_train)
+            #print('Training:',len(self.train), '\tTesting:',len(self.test))
+            if show_graph:
+                self.display_data()
+            self.split_timesteps(24, 48);
+            self.predict()
+         
 
     ''' split ordered dataset into train and test sets '''
     def split_train_test(self, frac_train):
@@ -86,16 +95,22 @@ class RNN(object):
         model.compile(optimizer='adam', loss='mse')
 
         # fit model 
-        model.fit(self.X, self.y, epochs=100, verbose=2)
+        model.fit(self.X, self.y, epochs=100, verbose=0)
 
         # demonstrate prediction
         x_input = self.X[0].T[0]
         x_input = x_input.reshape((1, self.num_in, features))
         yhat = model.predict(x_input, verbose=0)
+        print("Predicted: ")
         print(yhat)
+        self.calculate_error(yhat[0])
 
-
-
-
-
-
+    def calculate_error(self, predicted):
+        sum = 0
+        correct = self.dataset[-48:]
+        print("Actual:")
+        print(correct)
+        for i in range(48):
+            sum += 100*(abs(predicted[i] - correct[i]))/(correct[i])
+        print("Average percent error: " + str(sum/48))
+        print()

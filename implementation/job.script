@@ -1,0 +1,10 @@
+#!/bin/bash
+#$ -M gkopp@nd.edu	 # Email address for job notification
+#$ -m abe		 # Send mail when job begins, ends and aborts
+#$ -q gpu       #Specify gpu@gpu-name when memory requirements are high
+#$ -l gpu=1
+#$ -N ann	         # Specify job name
+
+module load tensorflow
+
+~/anaconda3/bin/python3 main.py > log.txt
