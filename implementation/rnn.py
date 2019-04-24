@@ -22,19 +22,19 @@ class RNN(object):
     ''' load data into usable objects '''
     def load_data(self, data, frac_train, show_graph):
         dataframe = pd.read_csv(data)
-        print(len(dataframe.values))
+        #print(len(dataframe.values))
         i = 0
         for value in dataframe.values:
-            if i == 50:
+            if i == 5:
                 break
             i += 1
-            self.dataset = value
+            self.dataset = value[:-168]
             self.dataset = self.dataset.astype('float32') 
             self.split_train_test(frac_train)
             #print('Training:',len(self.train), '\tTesting:',len(self.test))
             if show_graph:
                 self.display_data()
-            self.split_timesteps(24, 48);
+            self.split_timesteps(84, 168);
             self.predict()
          
 
@@ -107,10 +107,10 @@ class RNN(object):
 
     def calculate_error(self, predicted):
         sum = 0
-        correct = self.dataset[-48:]
+        correct = self.dataset[-168:]
         print("Actual:")
         print(correct)
-        for i in range(48):
+        for i in range(168):
             sum += 100*(abs(predicted[i] - correct[i]))/(correct[i])
-        print("Average percent error: " + str(sum/48))
+        print("Average percent error: " + str(sum/168))
         print()
