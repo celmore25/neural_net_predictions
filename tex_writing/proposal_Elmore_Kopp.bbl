@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{3}
+\begin{thebibliography}{8}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -37,6 +37,22 @@
 \providecommand\natexlab[1]{#1}
 \providecommand\showeprint[2][]{arXiv:#2}
 
+\bibitem[\protect\citeauthoryear{Amjady and Keynia}{Amjady and Keynia}{2008}]%
+        {Amjady2008}
+\bibfield{author}{\bibinfo{person}{Nima Amjady} {and} \bibinfo{person}{Farshid
+  Keynia}.} \bibinfo{year}{2008}\natexlab{}.
+\newblock \showarticletitle{{Day ahead price forecasting of electricity markets
+  by a mixed data model and hybrid forecast method}}.
+\newblock \bibinfo{journal}{\emph{International Journal of Electrical Power
+  {\&} Energy Systems}} \bibinfo{volume}{30}, \bibinfo{number}{9}
+  (\bibinfo{date}{nov} \bibinfo{year}{2008}), \bibinfo{pages}{533--546}.
+\newblock
+\showISSN{0142-0615}
+\urldef\tempurl%
+\url{https://doi.org/10.1016/J.IJEPES.2008.06.001}
+\showDOI{\tempurl}
+
+
 \bibitem[\protect\citeauthoryear{California}{California}{[n. d.]}]%
         {CAenergy2}
 \bibfield{author}{\bibinfo{person}{California}.} \bibinfo{year}{[n.
@@ -50,12 +66,30 @@
 \tempurl}
 
 
+\bibitem[\protect\citeauthoryear{Conejo, Plazas, Espinola, and Molina}{Conejo
+  et~al\mbox{.}}{2005b}]%
+        {Conejo2005}
+\bibfield{author}{\bibinfo{person}{A.J. Conejo}, \bibinfo{person}{M.A. Plazas},
+  \bibinfo{person}{R. Espinola}, {and} \bibinfo{person}{A.B. Molina}.}
+  \bibinfo{year}{2005}\natexlab{b}.
+\newblock \showarticletitle{{Day-Ahead Electricity Price Forecasting Using the
+  Wavelet Transform and ARIMA Models}}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Power Systems}}
+  \bibinfo{volume}{20}, \bibinfo{number}{2} (\bibinfo{date}{may}
+  \bibinfo{year}{2005}), \bibinfo{pages}{1035--1042}.
+\newblock
+\showISSN{0885-8950}
+\urldef\tempurl%
+\url{https://doi.org/10.1109/TPWRS.2005.846054}
+\showDOI{\tempurl}
+
+
 \bibitem[\protect\citeauthoryear{Conejo, Contreras, Esp{\'{i}}nola, and
-  Plazas}{Conejo et~al\mbox{.}}{2005}]%
+  Plazas}{Conejo et~al\mbox{.}}{2005a}]%
         {Conejo2005a}
 \bibfield{author}{\bibinfo{person}{Antonio~J. Conejo}, \bibinfo{person}{Javier
   Contreras}, \bibinfo{person}{Rosa Esp{\'{i}}nola}, {and}
-  \bibinfo{person}{Miguel~A. Plazas}.} \bibinfo{year}{2005}\natexlab{}.
+  \bibinfo{person}{Miguel~A. Plazas}.} \bibinfo{year}{2005}\natexlab{a}.
 \newblock \showarticletitle{{Forecasting electricity prices for a day-ahead
   pool-based electric energy market}}.
 \newblock \bibinfo{journal}{\emph{International Journal of Forecasting}}
@@ -82,6 +116,58 @@
 \showISSN{0306-2619}
 \urldef\tempurl%
 \url{https://doi.org/10.1016/J.APENERGY.2016.12.081}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Garcia, Contreras, VanAkkeren, and
+  Garcia}{Garcia et~al\mbox{.}}{2005}]%
+        {Garcia2005}
+\bibfield{author}{\bibinfo{person}{R.C. Garcia}, \bibinfo{person}{J.
+  Contreras}, \bibinfo{person}{M. VanAkkeren}, {and} \bibinfo{person}{J.B.C.
+  Garcia}.} \bibinfo{year}{2005}\natexlab{}.
+\newblock \showarticletitle{{A GARCH Forecasting Model to Predict Day-Ahead
+  Electricity Prices}}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Power Systems}}
+  \bibinfo{volume}{20}, \bibinfo{number}{2} (\bibinfo{date}{may}
+  \bibinfo{year}{2005}), \bibinfo{pages}{867--874}.
+\newblock
+\showISSN{0885-8950}
+\urldef\tempurl%
+\url{https://doi.org/10.1109/TPWRS.2005.846044}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Tan, Zhang, Wang, and Xu}{Tan
+  et~al\mbox{.}}{2010}]%
+        {Tan2010}
+\bibfield{author}{\bibinfo{person}{Zhongfu Tan}, \bibinfo{person}{Jinliang
+  Zhang}, \bibinfo{person}{Jianhui Wang}, {and} \bibinfo{person}{Jun Xu}.}
+  \bibinfo{year}{2010}\natexlab{}.
+\newblock \showarticletitle{{Day-ahead electricity price forecasting using
+  wavelet transform combined with ARIMA and GARCH models}}.
+\newblock \bibinfo{journal}{\emph{Applied Energy}} \bibinfo{volume}{87},
+  \bibinfo{number}{11} (\bibinfo{date}{nov} \bibinfo{year}{2010}),
+  \bibinfo{pages}{3606--3610}.
+\newblock
+\showISSN{0306-2619}
+\urldef\tempurl%
+\url{https://doi.org/10.1016/J.APENERGY.2010.05.012}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Wang and Wu}{Wang and Wu}{2012}]%
+        {Wang2012}
+\bibfield{author}{\bibinfo{person}{Yudong Wang} {and}
+  \bibinfo{person}{Chongfeng Wu}.} \bibinfo{year}{2012}\natexlab{}.
+\newblock \showarticletitle{{Forecasting energy market volatility using GARCH
+  models: Can multivariate models beat univariate models?}}
+\newblock \bibinfo{journal}{\emph{Energy Economics}} \bibinfo{volume}{34},
+  \bibinfo{number}{6} (\bibinfo{date}{nov} \bibinfo{year}{2012}),
+  \bibinfo{pages}{2167--2181}.
+\newblock
+\showISSN{0140-9883}
+\urldef\tempurl%
+\url{https://doi.org/10.1016/J.ENECO.2012.03.010}
 \showDOI{\tempurl}
 
 
