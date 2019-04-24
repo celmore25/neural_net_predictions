@@ -8,5 +8,4 @@ if __name__ == '__main__':
 	for i in range(1):
 		print('Testing Day',i,'\n')
 		roll_data = dataframe.T[i*24:168 + i*24].T
-		time_rnn.load_data(roll_data,1, True);
- 
+		time_rnn.load_data(roll_data,1, True)
