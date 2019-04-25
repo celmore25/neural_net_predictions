@@ -3,10 +3,10 @@
 #$ -m abe		 # Send mail when job begins, ends and aborts
 #$ -q gpu       #Specify gpu@gpu-name when memory requirements are high
 #$ -l gpu=1
-#$ -N ann	         # Specify job name
+#$ -N ann_long	         # Specify job name
 
 module load conda
 source activate /afs/crc.nd.edu/user/c/celmore1/pyomo_dir
 
-python main_clay.py > log_clay.txt
+python main_clay.py > single_log.txt
 
