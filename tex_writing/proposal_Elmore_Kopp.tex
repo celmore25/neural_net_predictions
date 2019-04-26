@@ -161,8 +161,7 @@ Recent advances in Recurrent Neural Networks (RNN) in the past 5 to 10 years hav
 
 \begin{itemize}
 	\item Section \ref{sec:approach}: A problem statement along with the design of the RNN, an explanation of the dataset, and software implementation details.
-	\item Section \ref{sec:results}: Results of the forecasting performance of our RNN forecaster is presented.
-	\item Section \ref{sec:discussion}: A discussion of how RNN forecasting compares to existing methods and other insights from this project.
+	\item Section \ref{sec:results}: Results of the forecasting performance of our RNN forecaster is presented along with a discussion of how RNN forecasting compares to existing methods and other insights from this project.
 	\item Section \ref{sec:conclusions}: Major findings from the paper are summarized.
 \end{itemize}
 
@@ -174,42 +173,102 @@ Recent advances in Recurrent Neural Networks (RNN) in the past 5 to 10 years hav
 \label{sec:approach}
 
 \subsection{Problem Statement}
+We set out to use a recurrent neural network to forecast Day Ahead Market (DAM) prices of the California Independent System Operator (CAISO)  in 2015. Specifically, we wanted to forecast 7 24 hour increments for a week in January for 50 different energy providers in the CAISO. 
+
+We also set out to get in depth information on one energy provider so we forecasted a full year (2015) of prices for one energy provider.
 
 \subsection{Neural Network Methodology}
+We used a recurrent neural network (RNN) for our time series prediction. We chose to use this architecture because RNNs are made to deal with sequential information. In other neural network architectures, it is assumed that all inputs are independent which would not be useful for a time series prediction where the order of the inputs is extremely important to accurately predict outputs. RNNs accomplish this by keeping a “memory” of inputs they have seen at previous timesteps to make decisions about future timesteps. 
 
-Outline:
-\begin{itemize}
-	\item Basic explanation of an RNN.
-	\item How does an RNN relate to energy prices.
-	\item Figure: How does our RNN look in relation to energy prices.
-	\item What are the specifics of the RNN we use.
-	\item What was the methodology we used to determine the this design.
-	\item INCLUDE HOW ERROR IS CALCULATED!
-	\item Probably should cite the towards data science link we used.
-\end{itemize}
+\begin{figure}[h]
+\includegraphics[width=0.45\textwidth]{tex_writing/rnn.png}
+\caption{An unrolled recurrent neural network cell}
+\label{fig:rnn}
+\end{figure}
+\textbf{https://medium.com/themlblog/time-series-analysis-using-recurrent-neural-networks-in-tensorflow-2a0478b00be7}
+
+The figure above depicts an unrolled RNN. For a sequence with t time steps, we will unroll our network into t corresponding layers. The blue nodes labelled x1,  x2, etc. are our inputs at time step one, two, and so on. In the case of this paper, these would be energy prices at hour 1, hour 2, etc. The green nodes labelled A are our hidden states at each time step. This is how the network is able to have a memory. It is calculated with the previous hidden step and the current input. Because it takes this previous hidden step into account, it captures information about time steps that have already been processed. Finally, the purple nodes labelled with h’s are the outputs at each time step that are calculated from the memory in their associated hidden node. For us, these outputs are the energy prices we are predicting for future time steps. 
+
+Unfortunately, basic RNNs are not perfect for this task because of the vanishing gradient problem. RNNs are trained with back propagation and gradient descent learning methods. When dealing with a huge number of time steps, as is the case in our dataset, calculated gradients can become so small that the neural network is unable to continue to train. 
+
+Our solution to this problem was using a Long-short Term Memory network (LSTM). These are a type of neural network that have input gates, output gates, and forget gates that give the network the ability to keep some information while forgetting other information. This cuts down the amount of data used and solves the vanishing gradient problem. 
+
+\textbf{https://medium.com/themlblog/time-series-analysis-using-recurrent-neural-networks-in-tensorflow-2a0478b00be7}
+
+We wanted to be able to forecast a days worth of energy prices in advance or 24 output time steps. To accomplish this, we created a Multi-Step LSTM where our output was a vector of 24 prices corresponding to the 24 time steps in the future we predicted. Our training data was the 168 time steps (one weeks worth) of data that came directly before the 24 hour testing period.
+
+\textbf{https://machinelearningmastery.com/how-to-develop-lstm-models-for-time-series-forecasting/}
+
+In order to get an accurate view of our network and match other current evaluation models for energy price forecasting, for each of the fifty nodes we analyzed, we performed a rolling horizon analysis to predict seven days worth of data. In other words, first we used $t_{0}$ through $t_{167}$ to predict $t_{168}$ through $t_{191}$ , then we used $t_{24}$ through $t_{191}$ to predict $t_{192}$ through $t_{216}$ , and so on five more times until we had seven days of predictions or 168 hours.  
+
+To calculate error, we performed a standard average percent error calculation on our predicted prices vs the actual price. We chose percent error in order to be able to easily compare our results to other energy forecasting results on the same data from different prediction methods.
+
+$$ error = \frac{1}{7}\sum_{i=0}^{6}\frac{1}{24}\sum_{j=0}^{23}\frac{|p_{i,j}-a_{i,j}|}{a_{i,j}}$$
+
+In the above equation $p_{i,j}$ is the predicted energy price on day i, hour j and $a_{i,j}$ is the actual energy price on day i, hour j.
+
+As a supplemental inquiry, we also investigated forecasting a full year of energy prices for one energy provider. This was done almost identically, except for this study we used 336 input time steps as training to predict 24 hour time step outputs. We performed this calculation 356 times to see how our RNN performs on more long term data. Error was calculated using the same method above except for 365 days instead of 7:
+
+$$ error = \frac{1}{365}\sum_{i=0}^{364}\frac{1}{24}\sum_{j=0}^{23}\frac{|p_{i,j}-a_{i,j}|}{a_{i,j}}$$
+
 
 \subsection{Data Sources}
-The dataset for this project was kindly provided by the Dowling Lab for Uncertainty Quantification and Mathematical Optimization at the University of Notre Dame in the Department of Chemical and Biomolecular Engineering. The dataset is comprised of over 6500 energy vendors, called nodes, participating in the CAISO. There is a full year's worth of data for each node in 2015, and price measurements are recorded at 1 hour intervals. Latitude and longitude coordinates are known for around 2000 of these nodes for visualization purposes. Because of the limited timeline of this project, only 50 of these nodes will be used, and only a single week of data in January 2015 will be used for testing purposes.  This is a reasonable thing to do as many papers report error values for single weeks in Janurary \cite{Conejo2005a,Garcia2005,Tan2010}. However, a single node will be used to predict prices 24 hours into the future for a full year in order to give a more accurate representation of error quantification across a larger time span. Furthermore, these papers only report results for single nodes in the DAM. Because our results include 50 nodes, it can be concluded that the results obtained for this dataset are statistically significant. 
+The dataset for this project was kindly provided by the Dowling Lab for Uncertainty Quantification and Mathematical Optimization at the University of Notre Dame in the Department of Chemical and Biomolecular Engineering. The dataset is comprised of over 6500 energy vendors, called nodes, participating in the CAISO. There is a full year's worth of data for each node in 2015, and price measurements are recorded at 1 hour intervals. Latitude and longitude coordinates are known for around 2000 of these nodes for visualization purposes. Because of the limited timeline of this project, only 50 of these nodes will be used, and only a single week of data in January 2015 will be used for testing purposes.  This is a reasonable thing to do as many papers report error values for single weeks in January \cite{Conejo2005a,Garcia2005,Tan2010}. However, a single node will be used to predict prices 24 hours into the future for a full year in order to give a more accurate representation of error quantification across a larger time span. Furthermore, these papers only report results for single nodes in the DAM. Because our results include 50 nodes, it can be concluded that the results obtained for this dataset are statistically significant. 
 
 \subsection{Software Implementation}
+This study was implemented using Keras with a TensorFlow backend. Specifically, we used the sequential library in the Keras packaged to define and train our LSTM model. We chose to use Keras because it is allowed us to access the deep learning resources of TensorFlow in an easy to use API. 
 
-Outline:
-\begin{itemize}
-	\item Tensorflow
-	\item CRC GPUs
-	\item Code available at: GitHub
-	\item Find the CRC thing we have to mention
-\end{itemize}
+Because we were dealing with a huge amount of data, our study had a very high computation time. To make this more manageable, we submitted our code as jobs to the University of Notre Dame Center for Research Computing GPUs. This allowed faster and more convenient processing than if we were to run our model locally. 
+
+Our entire code suite  is available at:
+
+https://github.com/celmore25/neural_net_predictions.
+
+This includes our class implementation of the model, our data, our evaluation tool, and every other piece of code we wrote in pursuit of completing this study. 
+
+This research was supported in part by the Notre Dame Center for Research Computing through the use of available GPU systems. 
+
+%\section{Modeling Approach}
+%\label{sec:approach}
+%
+%\subsection{Problem Statement}
+%
+%\subsection{Neural Network Methodology}
+%
+%Outline:
+%\begin{itemize}
+%	\item Basic explanation of an RNN.
+%	\item How does an RNN relate to energy prices.
+%	\item Figure: How does our RNN look in relation to energy prices.
+%	\item What are the specifics of the RNN we use.
+%	\item What was the methodology we used to determine the this design.
+%	\item INCLUDE HOW ERROR IS CALCULATED!
+%	\item Probably should cite the towards data science link we used.
+%\end{itemize}
+%
+%\subsection{Data Sources}
+%The dataset for this project was kindly provided by the Dowling Lab for Uncertainty Quantification and Mathematical Optimization at the University of Notre Dame in the Department of Chemical and Biomolecular Engineering. The dataset is comprised of over 6500 energy vendors, called nodes, participating in the CAISO. There is a full year's worth of data for each node in 2015, and price measurements are recorded at 1 hour intervals. Latitude and longitude coordinates are known for around 2000 of these nodes for visualization purposes. Because of the limited timeline of this project, only 50 of these nodes will be used, and only a single week of data in January 2015 will be used for testing purposes.  This is a reasonable thing to do as many papers report error values for single weeks in Janurary \cite{Conejo2005a,Garcia2005,Tan2010}. However, a single node will be used to predict prices 24 hours into the future for a full year in order to give a more accurate representation of error quantification across a larger time span. Furthermore, these papers only report results for single nodes in the DAM. Because our results include 50 nodes, it can be concluded that the results obtained for this dataset are statistically significant. 
+%
+%\subsection{Software Implementation}
+%
+%Outline:
+%\begin{itemize}
+%	\item Tensorflow
+%	\item CRC GPUs
+%	\item Code available at: GitHub
+%	\item Find the CRC thing we have to mention
+%\end{itemize}
 
 
 % ============================================================================================================================= %
 %														Results																       %
 % ============================================================================================================================= %
-\section{Results}
+\section{Results and Discussion}
+\label{sec:results}
 
 Now that we have shown how we are going to forecast market prices with a RNN, we will now enter the results section where we analyze the effectiveness of RNNs. 
 
-\label{sec:results}
+\subsection{Example Forecasts}
 
 %Figures and Tables we will need:
 %\begin{itemize}
@@ -222,7 +281,7 @@ Now that we have shown how we are going to forecast market prices with a RNN, we
 %	\item Table: Aggregated statistics on CPU time.
 %\end{itemize}
 
-It is important to notice that variations in market prices can significantly alter the ability of RNNs to accurately predict DAM prices. Figure \ref{fig:ex_forecast} was constructed by training a RNN with 336 hours of training data, or two weeks. This 336 hour training set was then split into 265 training instances. These instances consisted of one 24 hour input, and the corresponding 24 hour output that would be the next day's market data. Two different forecasts are shown in Figure \ref{fig:ex_forecast} to illustrate how different inputs to the RNN can drastically alter its ability to forecast market prices. In the first plot (top), there is well behaving periodic wave input to the RNN. The output is a forecast that is extremely successful with a small error of only 4.4\%. However, the second plot (bottom) shows that when there is an input that does not as 
+It is important to notice that variations in market prices can significantly alter the ability of RNNs to accurately predict DAM prices. Figure \ref{fig:ex_forecast} was constructed by training a RNN with 336 hours of training data, or two weeks. This 336 hour training set was then split into 265 training instances. These instances consisted of one 24 hour input, and the corresponding 24 hour output that would be the next day's market data. Two different forecasts are shown in Figure \ref{fig:ex_forecast} to illustrate how different inputs to the RNN can drastically alter its ability to forecast market prices. In the first plot (top), there is well behaving periodic wave input to the RNN. The output is a forecast that is extremely successful with a small error of only 4.4\%. However, the second plot (bottom) shows that when there is an input that does not behave as well. Without the direct sinusoidal behavior, the RNN struggles to accurately predict the price at an error of 27\%. Based on this analysis, it will be important to look at aggregated results from more than two forecasts in order to show how well an RNN actually performs in forecasting the CAISO DAM.
 
 \begin{figure}[h]
 \includegraphics[width=0.45\textwidth]{fig_3.png}
@@ -230,9 +289,15 @@ It is important to notice that variations in market prices can significantly alt
 \label{fig:ex_forecast}
 \end{figure}
 
+\subsection{Multiple Node, Single Week Forecasts}
+
+With Figure \ref{fig:ex_forecast} motivating the exploration into aggregated results from the dataset, Figure \ref{fig:hist_small} shows a histogram of the forecasting results of 50 nodes in the CAISO for a single week in January. This histogram was created by training 50 separate RNNs on 168 hours of training data for each individual node. These RNNs then predict 24 hours into the future and an error measurement is taken based on the true data. The horizon is then rolled into the future for 7 days in a row, and the error measurements for a week are averaged to give the results in Figure \ref{fig:hist_small}. The histogram shows the error is reasonably dependent on the node being forecasted. This is most likely due to different spatial dependencies in price points across California. These influences can include weather, natural resource availability, etc. Because of these natural variations, it is expected that each node has a very different performance. 
+
+\textbf{NOTE TO THE REVIEWER: We are currently testing how inclusion of more training data (336 hours) improves our forecasting. We will have another histogram here showing these results at a later date.}
+
 \begin{figure}[h]
 \includegraphics[width=0.45\textwidth]{fig_5.png}
-\caption{Histogram of all nodes.}
+\caption{Histogram of all nodes' results at forecasting a week of data in January 2015.}
 \label{fig:hist_small}
 \end{figure}
 
@@ -244,8 +309,11 @@ It is important to notice that variations in market prices can significantly alt
 %\label{fig:hist_large}
 %\end{figure}
 
+Table \ref{tab:all_nodes} provides some aggregated statistics for the single week performance of a RNN across 50 different nodes. An error rate of 14\% is similar to literature values reported for certain single weeks in the CAISO from various literature findings that were mentioned in the introduction. However, this is not beating current standards of forecasting with traditional ARIMA models. In order to look further into how effective RNN forecasting is, a single node is investigated more in depth in the next section.
+
 \begin{table}[h]
 \begin{tabular}{lll}
+\hline
 \hline
 Training Data Used & 1 week & 2 weeks \\
 \hline
@@ -253,10 +321,15 @@ Median             & 14.49  & N/A     \\
 Mean               & 14.34  & N/A     \\
 Standard Deviation & 3.13   & N/A    \\
 \hline
+\hline
 \end{tabular}
 \caption{Aggregated statistical performance for a single week in January when 1 week of training data was used vs. 2 weeks of training data (2 week data is running currently).}
 \label{tab:all_nodes}
 \end{table}
+
+\subsection{Single Node, Full Year Forecasts}
+
+As previously mentioned, it is desired to look at a single node's performance in RNN forecasting for the whole year in 2015. Figure \ref{fig:hist_single} was constructed by using 336 hours of rolling training data for a single node in the CAISO. A different RNN was trained for each rolling horizon, and the subsequent 24 hour forecast was recorded. The histogram shows the error rate as a function of the number of times it occurred. A first observation on Figure \ref{fig:hist_single} is that the dataset is very skewed to the right. From a market perspective, this means the RNN forecasts were generally quite accurate, but there were some large errors that did occur. It should also be noted that a large outlier at around 200\% is not shown in this graph. However, the overall accuracy of the test was quite good. The median error for the full year was only 9\% which is lower than previously reported for forecasting the CAISO via ARIMA and GARCH modeling \cite{Conejo2005a,Garcia2005}. 
 
 \begin{figure}[h]
 \includegraphics[width=0.45\textwidth]{fig_7.png}
@@ -264,14 +337,19 @@ Standard Deviation & 3.13   & N/A    \\
 \label{fig:hist_single}
 \end{figure}
 
+An important thing to look at in the CAISO market is the tendency for the market to change between the seasons. It is well documented that price ranges are quite different in the four quarters of the year. To connect this observation with how well our RNN performs, Figure \ref{fig:time_single} plots the error of each day in forecasting across the whole year of 2015. An observation made from this graph is that the error does not seem to be very dependent on the seasonality of the data. There are some abrupt error jumps, but those are most likely due to natural market disturbances, not seasonal variations. 
+
 \begin{figure}[h]
 \includegraphics[width=0.45\textwidth]{fig_8.png}
 \caption{Time series plot of a single node run through the whole year.}
 \label{fig:time_single}
 \end{figure}
 
+Table \ref{tab:single} gives some aggregated results on the results shown in Figures \ref{fig:time_single} and \ref{fig:hist_single}. The qualitative observation that seasonality is not very important to RNN forecasting is held up by this table. A swing of only 1\% error between seasons in both the median and the mean error shows that the RNN is very resistant to seasonal market changes. This bodes well for the usage of RNNs in further forecasting of DAM prices. 
+
 \begin{table}[h]
 \begin{tabular}{llllll}
+\hline
 \hline
 Quarter & All   & 1    & 2    & 3     & 4     \\
 \hline
@@ -279,29 +357,37 @@ Median  & 8.89  & 8.39 & 9.34 & 9.29  & 8.80  \\
 Mean    & 10.14 & 9.60 & 9.67 & 10.53 & 10.74 \\
 Std.    & 4.59  & 4.78 & 3.03 & 4.67  & 5.41 \\
 \hline
+\hline
 \end{tabular}
 \caption{Aggregated statistical performance for a single node in 2015.}
 \label{tab:single}
 \end{table}
 
+\subsection{Key Insights}
+
+Now that all of these tests have been run and basic analysis has been performed, it is important to point out some key insights that can be determined. First, we have shown that RNN performance is extremely dependent on the input to the learning algorithm. If the algorithm is trained with well behaving market prices, then a poorly behaving market price is input into the network, the forecast can be expected to be poor. However, it is shown that using more market data can take decrease average error from 15\% to less than 10\%. Another important insight gained from this study is that RNN forecasting is quite resilient to seasonal changes in market dynamics. This is an interesting result as many literature finding suggest that seasonal differences are a large contributor to traditional forecasting method failures \cite{Conejo2005a,Garcia2005}. With these things in mind, RNNs clearly show a lot of potential for forecasting DAM prices in the CAISO and potentially other markets. 
 
 % ============================================================================================================================= %
 %														Discussion															       %
 % ============================================================================================================================= %
-\section{Discussion}
-\label{sec:discussion}
-
-Figures and Tables we will need:
-\begin{itemize}
-	\item Figure: Graphical comparison of how backcasting does not do what the RNN can do.
-	\item Figure/Table: Comparison to techniques that have been mentioned earlier in the paper and backcasting.
-\end{itemize}
+%\section{Discussion}
+%\label{sec:discussion}
+%
+%Figures and Tables we will need:
+%\begin{itemize}
+%	\item Figure: Graphical comparison of how backcasting does not do what the RNN can do.
+%	\item Figure/Table: Comparison to techniques that have been mentioned earlier in the paper and backcasting.
+%\end{itemize}
 
 % ============================================================================================================================= %
 %														Conclusions															       %
 % ============================================================================================================================= %
 \section{Conclusions and Future Work}
 \label{sec:conclusions}
+
+In this paper we have shown that RNNs are well suited for energy market price predictions in the CAISO DAM in 2015. We report a median error of only 9\% can be achieved using a rolling forecast for a single energy resource in California. This compares well to traditional price forecasting methods such as ARIMA and GARCH. Furthermore, we show that these forecasts can be extended to multiple resources across the CAISO for a single week analysis in January 2015. Lastly, we show that RNN forecasting is reasonably resistant to market dynamic changes in seasonal changes in the CAISO.\\
+
+Although the results from this work have been promising, we would like to pursue a few more studies in future work. First and foremost, it would be interesting to repeat the full year testing for more than one node in 2015. This would give a more wholistic view of RNN forecasting performance. Also, we would like to explore the possibility of training RNNs with data from multiple nodes at once in order to be able to forecast along multiple nodes instead of just one. We believe these future ventures would be helpful in making a more compelling argument for the usage of RNNs in energy market forecasting in the future.
 
 % ============================================================================================================================= %
 %														References															       %
