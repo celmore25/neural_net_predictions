@@ -1,4 +1,4 @@
-def get_results(path,days,verbose = False):
+def get_results(path,inp_days,verbose = False):
 
 	''' print out clean version of data to show usage and verify accuracy '''
 	def print_results(days):
@@ -12,13 +12,13 @@ def get_results(path,days,verbose = False):
 		day # and node #  '''
 
 	# average percent error will be accessible as days[day #][node #]
-	days = [dict(), dict(), dict(), dict(), dict(), dict(), dict()]
+	days = [dict() for i in range(inp_days)]
 
 	# initialize indexing variables
 	curr_day = None
 	curr_node = None
 
-	for line in open('log_clay.txt'):
+	for line in open(path):
 		line = line.strip()
 		words = line.split()
 
@@ -45,9 +45,9 @@ def get_results(path,days,verbose = False):
 	return days
 
 if __name__ == '__main__':
-	path = 'log_clay.txt'
-	days = 7
-	days = get_results(path,days,verbose = True)
+	path = '../implementation/log_clay.txt'
+	inp_days = 7
+	days = get_results(path,inp_days,verbose = True)
 
 
 
