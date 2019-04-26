@@ -1,6 +1,7 @@
 %
 % The first command in your LaTeX source must be the \documentclass command.
 \documentclass[sigconf]{acmart}
+\usepackage{hyperref}
 %\documentclass{acmart}
 
 %
@@ -174,32 +175,61 @@ Recent advances in Recurrent Neural Networks (RNN) in the past 5 to 10 years hav
 \label{sec:approach}
 
 \subsection{Problem Statement}
+We set out to use a recurrent neural network to forecast Day Ahead Market (DAM) prices of the California Independent System Operator (CAISO)  in 2015. Specifically, we wanted to forecast 7 24 hour increments for a week in January for 50 different energy providers in the CAISO. 
+
+We also set out to get in depth information on one energy provider so we forecasted a full year (2015) of prices for one energy provider.
 
 \subsection{Neural Network Methodology}
+We used a recurrent neural network (RNN) for our time series prediction. We chose to use this architecture because RNNs are made to deal with sequential information. In other neural network architectures, it is assumed that all inputs are independent which would not be useful for a time series prediction where the order of the inputs is extremely important to accurately predict outputs. RNNs accomplish this by keeping a “memory” of inputs they have seen at previous timesteps to make decisions about future timesteps. 
 
-Outline:
-\begin{itemize}
-	\item Basic explanation of an RNN.
-	\item How does an RNN relate to energy prices.
-	\item Figure: How does our RNN look in relation to energy prices.
-	\item What are the specifics of the RNN we use.
-	\item What was the methodology we used to determine the this design.
-	\item INCLUDE HOW ERROR IS CALCULATED!
-	\item Probably should cite the towards data science link we used.
-\end{itemize}
+\begin{figure}[h]
+\includegraphics[width=0.45\textwidth]{tex_writing/rnn.png}
+\caption{An unrolled recurrent neural network cell}
+\label{fig:rnn}
+\end{figure}
+\textbf{https://medium.com/themlblog/time-series-analysis-using-recurrent-neural-networks-in-tensorflow-2a0478b00be7}
+
+The figure above depicts an unrolled RNN. For a sequence with t timesteps, we will unroll our network into t corresponding layers. The blue nodes labelled x1,  x2, etc. are our inputs at time step one, two, and so on. In the case of this paper, these would be energy prices at hour 1, hour 2, etc. The green nodes labelled A are our hidden states at each timestep. This is how the network is able to have a memory. It is calculated with the previous hidden step and the current input. Because it takes this previous hidden step into account, it captures information about timesteps that have already been processed. Finally, the purple nodes labelled with h’s are the outputs at each timestep that are calculated from the memory in their associated hidden node. For us, these outputs are the energy prices we are predicting for future timesteps. 
+
+Unfortunately, basic RNNs are not perfect for this task because of the vanishing gradient problem. RNNs are trained with backpropagation and gradient descent learning methods. When dealing with a huge number of timesteps, as is the case in our dataset, calculated gradients can become so small that the neural network is unable to continue to train. 
+
+Our solution to this problem was using a Long-short Term Memory network (LSTM). These are a type of neural network that have input gates, output gates, and forget gates that give the network the ability to keep some information while forgetting other information. This cuts down the amount of data used and solves the vanishing gradient problem. 
+
+\textbf{https://medium.com/themlblog/time-series-analysis-using-recurrent-neural-networks-in-tensorflow-2a0478b00be7}
+
+We wanted to be able to forecast a days worth of energy prices in advance or 24 output timesteps. To accomplish this, we created a Multi-Step LSTM where our output was a vector of 24 prices corresponding to the 24 timesteps in the future we predicted. Our training data was the 168 timesteps (one weeks worth) of data that came directly before the 24 hour testing period.
+
+\textbf{https://machinelearningmastery.com/how-to-develop-lstm-models-for-time-series-forecasting/}
+
+In order to get an accurate view of our network and match other current evaluation models for energy price forecasting, for each of the fifty nodes we analyzed, we performed a rolling horizon analysis to predict seven days worth of data. In other words, first we used $t_{0}$ through $t_{167}$ to predict $t_{168}$ through $t_{191}$ , then we used $t_{24}$ through $t_{191}$ to predict $t_{192}$ through $t_{216}$ , and so on five more times until we had seven days of predictions or 168 hours.  
+
+To calculate error, we performed a standard average percent error calculation on our predicted prices vs the actual price. We chose percent error in order to be able to easily compare our results to other energy forecasting results on the same data from different prediction methods.
+
+$$ error = \frac{1}{7}\sum_{i=0}^{6}\frac{1}{24}\sum_{j=0}^{23}\frac{|p_{i,j}-a_{i,j}|}{a_{i,j}}$$
+
+In the above equation $p_{i,j}$ is the predicted energy price on day i, hour j and $a_{i,j}$ is the actual energy price on day i, hour j.
+
+As a supplemental inquiry, we also investigated forecasting a full year of energy prices for one energy provider. This was done almost identically, except for this study we used 336 input timesteps as training to predict 24 hour timestep outputs. We performed this calculation 356 times to see how our RNN performs on more long term data. Error was calculated using the same method above except for 365 days instead of 7:
+
+$$ error = \frac{1}{365}\sum_{i=0}^{364}\frac{1}{24}\sum_{j=0}^{23}\frac{|p_{i,j}-a_{i,j}|}{a_{i,j}}$$
+
 
 \subsection{Data Sources}
 The dataset for this project was kindly provided by the Dowling Lab for Uncertainty Quantification and Mathematical Optimization at the University of Notre Dame in the Department of Chemical and Biomolecular Engineering. The dataset is comprised of over 6500 energy vendors, called nodes, participating in the CAISO. There is a full year's worth of data for each node in 2015, and price measurements are recorded at 1 hour intervals. Latitude and longitude coordinates are known for around 2000 of these nodes for visualization purposes. Because of the limited timeline of this project, only 50 of these nodes will be used, and only a single week of data in January 2015 will be used for testing purposes.  This is a reasonable thing to do as many papers report error values for single weeks in Janurary \cite{Conejo2005a,Garcia2005,Tan2010}. However, a single node will be used to predict prices 24 hours into the future for a full year in order to give a more accurate representation of error quantification across a larger time span. Furthermore, these papers only report results for single nodes in the DAM. Because our results include 50 nodes, it can be concluded that the results obtained for this dataset are statistically significant. 
 
 \subsection{Software Implementation}
+This study was implemented using Keras with a TensorFlow backend. Specifically, we used the sequential library in the Keras packaged to define and train our LSTM model. We chose to use Keras because it is allowed us to access the deep learning resources of TensorFlow in an easy to use API. 
 
-Outline:
-\begin{itemize}
-	\item Tensorflow
-	\item CRC GPUs
-	\item Code available at: GitHub
-	\item Find the CRC thing we have to mention
-\end{itemize}
+Because we were dealing with a huge amount of data, our study had a very high computation time. To make this more manageable, we submitted our code as jobs to the University of Notre Dame Center for Research Computing GPUs. This allowed faster and more convenient processing than if we were to run our model locally. 
+
+Our entire code suite  is available at:
+
+https://github.com/celmore25/neural_net_predictions.
+
+This includes our class implementation of the model, our data, our evaluation tool, and every other piece of code we wrote in pursuit of completing this study. 
+
+This research was supported in part by the Notre Dame Center for Research Computing through the use of available GPU systems. 
+
 
 
 % ============================================================================================================================= %
