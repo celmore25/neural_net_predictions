@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  25 APR 2019 22:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  25 APR 2019 22:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -815,15 +815,6 @@ Include comment 'anonsuppress' (./proposal_Elmore_Kopp.aux
 
 LaTeX Warning: Label `fig:ex_prices' multiply defined.
 
-
-LaTeX Warning: Label `fig:ex_prices' multiply defined.
-
-
-LaTeX Warning: Label `fig:ex_prices' multiply defined.
-
-
-LaTeX Warning: Label `fig:ex_prices' multiply defined.
-
 )
 \openout1 = `proposal_Elmore_Kopp.aux'.
 
@@ -1141,10 +1132,14 @@ Package pdftex.def Info: fig_5.png  used on input line 235.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 248.
+
 <fig_7.png, id=93, 273.4215pt x 180.07275pt>
 File: fig_7.png Graphic file (type png)
 <use fig_7.png>
-Package pdftex.def Info: fig_7.png  used on input line 249.
+Package pdftex.def Info: fig_7.png  used on input line 263.
 (pdftex.def)             Requested size: 227.83119pt x 150.05383pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -1152,13 +1147,17 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <fig_8.png, id=94, 268.8444pt x 180.1932pt>
 File: fig_8.png Graphic file (type png)
 <use fig_8.png>
-Package pdftex.def Info: fig_8.png  used on input line 255.
+Package pdftex.def Info: fig_8.png  used on input line 269.
 (pdftex.def)             Requested size: 227.83119pt x 152.703pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 274.
+
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 269.
+(Font)              scaled to size 9.0pt on input line 298.
 [2.2 <./fig_3.png>] (./proposal_Elmore_Kopp.bbl
 LaTeX Info: Redefining \tempurl on input line 64.
 LaTeX Info: Redefining \tempurl on input line 83.
@@ -1168,29 +1167,23 @@ LaTeX Info: Redefining \tempurl on input line 136.
 LaTeX Info: Redefining \tempurl on input line 154.
 LaTeX Info: Redefining \tempurl on input line 170.
 ) [3.3 <./fig_5.png> <./fig_7.png> <./fig_8.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 295.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 295.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 324.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 324.
  (./proposal_Elmore_Kopp.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 295.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 295.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 324.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 324.
+Package rerunfilecheck Info: File `proposal_Elmore_Kopp.out' has not changed.
+(rerunfilecheck)             Checksum: 964CC5D47F8D6E8779764982CB555788;1563.
 
-
-Package rerunfilecheck Warning: File `proposal_Elmore_Kopp.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `proposal_Elmore_Kopp.out':
-(rerunfilecheck)             Before: 0CA36AC6A4AEF67544964B3515FB157E;1474
-(rerunfilecheck)             After:  4CA41A5C7E06004239EB30272386B57A;1563.
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 17911 strings out of 492649
- 270375 string characters out of 6129622
- 387642 words of memory out of 5000000
- 21063 multiletter control sequences out of 15000+600000
+ 17916 strings out of 492649
+ 270457 string characters out of 6129622
+ 391163 words of memory out of 5000000
+ 21066 multiletter control sequences out of 15000+600000
  125368 words of font info for 236 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
  60i,11n,94p,1294b,447s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1206,10 +1199,10 @@ neT.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/libertine/LinLib
 ertineTB.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/libertine/L
 inLibertineTI.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/newtx/
 txsys.pfb>
-Output written on proposal_Elmore_Kopp.pdf (3 pages, 1221852 bytes).
+Output written on proposal_Elmore_Kopp.pdf (3 pages, 1222675 bytes).
 PDF statistics:
- 174 PDF objects out of 1000 (max. 8388607)
- 141 compressed objects within 2 object streams
- 28 named destinations out of 1000 (max. 500000)
+ 176 PDF objects out of 1000 (max. 8388607)
+ 143 compressed objects within 2 object streams
+ 30 named destinations out of 1000 (max. 500000)
  40574 words of extra memory for PDF output out of 42996 (max. 10000000)
 
