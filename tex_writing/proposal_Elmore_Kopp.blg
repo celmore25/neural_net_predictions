@@ -4,52 +4,52 @@ The top-level auxiliary file: proposal_Elmore_Kopp.aux
 The style file: ACM-Reference-Format.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
-Database file #1: /Users/ClayElmore/Desktop/mendeley/DMD_Literature.bib
+Database file #1: /Users/ClayElmore/Desktop/dmd-price-analysis/bib_files/DMD_Literature.bib
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=20001) to 20 items from 10.
 Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Warning--empty year in CAenergy2
-You've used 8 entries,
+You've used 10 entries,
             5732 wiz_defined-function locations,
-            1370 strings with 16749 characters,
-and the built_in function-call counts, 10389 in all, are:
-= -- 1581
-> -- 344
+            1381 strings with 17176 characters,
+and the built_in function-call counts, 11887 in all, are:
+= -- 1747
+> -- 384
 < -- 0
-+ -- 113
-- -- 116
-* -- 744
-:= -- 995
-add.period$ -- 40
-call.type$ -- 8
-change.case$ -- 56
-chr.to.int$ -- 7
-cite$ -- 9
-duplicate$ -- 810
-empty$ -- 576
-format.name$ -- 143
-if$ -- 2622
++ -- 123
+- -- 132
+* -- 824
+:= -- 1167
+add.period$ -- 50
+call.type$ -- 10
+change.case$ -- 66
+chr.to.int$ -- 9
+cite$ -- 11
+duplicate$ -- 952
+empty$ -- 678
+format.name$ -- 159
+if$ -- 2944
 int.to.chr$ -- 3
 int.to.str$ -- 1
 missing$ -- 28
-newline$ -- 136
-num.names$ -- 63
-pop$ -- 250
+newline$ -- 160
+num.names$ -- 79
+pop$ -- 294
 preamble$ -- 1
-purify$ -- 120
+purify$ -- 148
 quote$ -- 0
-skip$ -- 276
+skip$ -- 334
 stack$ -- 0
-substring$ -- 834
-swap$ -- 102
+substring$ -- 944
+swap$ -- 112
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 139
+type$ -- 199
 warning$ -- 1
-while$ -- 65
+while$ -- 81
 width$ -- 0
-write$ -- 206
+write$ -- 246
 (There was 1 warning)

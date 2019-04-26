@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{8}
+\begin{thebibliography}{10}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -53,6 +53,20 @@
 \showDOI{\tempurl}
 
 
+\bibitem[\protect\citeauthoryear{Brownlee}{Brownlee}{2018}]%
+        {Brownlee2018}
+\bibfield{author}{\bibinfo{person}{Jason Brownlee}.}
+  \bibinfo{year}{2018}\natexlab{}.
+\newblock \bibinfo{title}{{How to Develop LSTM Models for Time Series
+  Forecasting}}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://machinelearningmastery.com/how-to-develop-lstm-models-for-time-series-forecasting/}
+\showURL{%
+\tempurl}
+
+
 \bibitem[\protect\citeauthoryear{California}{California}{[n. d.]}]%
         {CAenergy2}
 \bibfield{author}{\bibinfo{person}{California}.} \bibinfo{year}{[n.
@@ -100,6 +114,20 @@
 \urldef\tempurl%
 \url{https://doi.org/10.1016/J.IJFORECAST.2004.12.005}
 \showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Dasgupta}{Dasgupta}{2018}]%
+        {Dasgupta2018}
+\bibfield{author}{\bibinfo{person}{Tathagat Dasgupta}.}
+  \bibinfo{year}{2018}\natexlab{}.
+\newblock \bibinfo{title}{{Time-Series Analysis Using Recurrent Neural Networks
+  in Tensorflow}}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://medium.com/themlblog/time-series-analysis-using-recurrent-neural-networks-in-tensorflow-2a0478b00be7}
+\showURL{%
+\tempurl}
 
 
 \bibitem[\protect\citeauthoryear{Dowling, Kumar, and Zavala}{Dowling
