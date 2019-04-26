@@ -79,7 +79,7 @@
 % ============================================================================================================================= %
 
 \begin{abstract}
-This project proposes to construct a neural network that will forecast energy prices in the California Independent System Operator (CAISO). Accurate forecasting of energy prices in the CISO provides an economic opportunity for energy providers to incur profit and buyers to purchase at the lowest possible price. Traditional methods for forecasting have been used for many years to forecast these prices, but the recent advances in recurrent neural network time series forecasting presents a possible way to improve upon existing methods. The problem statement of this project is how to design a neural network to accurately predict stochastic energy prices.
+Energy market forecasting is a necessary for the functional operation of electricity markets across the globe. Because of large price swings in energy prices, sometimes as much as 4 times, there is a large economic opportunity for accurate forecasting to incur profit for energy users. However, these prices are notoriously hard to predict accurately because of the large stochastic nature inherent to the problem. In this paper we use Recurrent Neural Networks to forecast Day Ahead Market (DAM) prices in the California Independent System Operator (CAISO) in 2015. The study consists of forecasting 24 hour increments for a week in January for 50 different energy providers in the CAISO. Furthermore, a full year of prices is forecasted for a single Californian energy resource for all of 2015. We show that a full year's worth of forecasting in California has an average error of around 10\%. This is on par with current standards in traditional forecasting methods. It is also shown that Recurrent Neural Networks are more resistant to changes in market dynamics involving seasonal changes than traditional methods such as ARIMA or GARCH. 
 \end{abstract}
 
 %
@@ -157,8 +157,6 @@ Although prices in the CAISO DAM are quite volatile, they have very clear period
 
 Many standard time series forecasting methods have been used to predict DAM prices in the CAISO and other energy markets across the globe. For example, standard autoregressive integrated moving average (ARIMA) forecasting methods have been used to differing degrees of success in the CAISO market and the Spanish DAM. Conejo et al. have used ARIMA models to predict prices in the Spanish market with a 10\% error for the 2002 market \cite{Conejo2005a}. Furthermore, ARIMA has been shown to generate forecasts in the 2000 CAISO DAM with an error of around 13\% \cite{Garcia2005}. Another standard method for time series forecasting that has been used in the  Generalized autoregressive conditional heteroskedasticity (GARCH) method. Similar to ARIMA models, an error rate of around 10\% for the Spanish DAM has been reported when using GARCH \cite{Garcia2005}. More advanced hybrid methods have also been used for DAM forecasting. These methods include the usage of wavelet decompositions in order remove noise from data as well as the incorporation of ARIMA models in conjunction with GARCH methods \cite{Conejo2005,Tan2010,Amjady2008,Wang2012}. These various hybrid methods have error rates reported that range from as low as 1\% to as high as 25\%. 
 
-%\cite{Conejo2005,Tan2010,Shafie-khah2011,Amjady2008}.
-
 Recent advances in Recurrent Neural Networks (RNN) in the past 5 to 10 years have motivated this project to investigate their potential ability to predict CAISO DAM prices. The remainder of the paper will be organized in the following manner.
 
 \begin{itemize}
@@ -172,17 +170,10 @@ Recent advances in Recurrent Neural Networks (RNN) in the past 5 to 10 years hav
 %														Approach																       %
 % ============================================================================================================================= %
 
-%\section{Approach}
-%Because the dataset contains sequential information in the form of energy prices at different time increments, a recurrent neural network would be well suited to predicting future prices for this problem. This is because unlike in traditional neural networks, in recurrent neural networks there are loops that allow information about previous inputs to persist. In other words, it can use its memory from a previous time step to make a decision in a future time step. This is essential when working with time series data where order and contextual information is extremely important for accuracy.
-%At a high level, the proposed model would utilize long short-term memory recurrent neural network architecture. Long short-term memory networks are ideal for making time series predictions because they allow the model to decide what information to keep and what information to forget. This allows them to deal with gaps of unknown duration between notable events in a time series.
-%Our network will accept an input vector of past time series values and then return an output vector of predicted prices over the next 48 hours. 
-
 \section{Modeling Approach}
 \label{sec:approach}
 
 \subsection{Problem Statement}
-
-INCLUDE HOW ERROR IS CALCULATED!
 
 \subsection{Neural Network Methodology}
 
@@ -193,10 +184,12 @@ Outline:
 	\item Figure: How does our RNN look in relation to energy prices.
 	\item What are the specifics of the RNN we use.
 	\item What was the methodology we used to determine the this design.
+	\item INCLUDE HOW ERROR IS CALCULATED!
+	\item Probably should cite the towards data science link we used.
 \end{itemize}
 
 \subsection{Data Sources}
-The dataset for this project was kindly provided by the Dowling Lab for Uncertainty Quantification and Mathematical Optimization at the University of Notre Dame in the Department of Chemical and Biomolecular Engineering. The dataset is comprised of over 6500 energy vendors, called nodes, participating in the CAISO. There is a full year's worth of data for each node in 2015, and price measurements are recorded at 1 hour intervals. Latitude and longitude coordinates are known for around 2000 of these nodes for visualization purposes. However, because of the limited timeline of this project, only 50 of these nodes will be used, and only a single week of data in January 2015 will be used for testing purposes. This is a reasonable thing to do as many papers report error values for single weeks in Janurary \cite{Conejo2005a,Garcia2005,Tan2010}. Furthermore, these papers only report results for single nodes in the DAM. Because our results include 50 nodes, it can be concluded that the results obtained for this dataset are statistically significant. 
+The dataset for this project was kindly provided by the Dowling Lab for Uncertainty Quantification and Mathematical Optimization at the University of Notre Dame in the Department of Chemical and Biomolecular Engineering. The dataset is comprised of over 6500 energy vendors, called nodes, participating in the CAISO. There is a full year's worth of data for each node in 2015, and price measurements are recorded at 1 hour intervals. Latitude and longitude coordinates are known for around 2000 of these nodes for visualization purposes. Because of the limited timeline of this project, only 50 of these nodes will be used, and only a single week of data in January 2015 will be used for testing purposes.  This is a reasonable thing to do as many papers report error values for single weeks in Janurary \cite{Conejo2005a,Garcia2005,Tan2010}. However, a single node will be used to predict prices 24 hours into the future for a full year in order to give a more accurate representation of error quantification across a larger time span. Furthermore, these papers only report results for single nodes in the DAM. Because our results include 50 nodes, it can be concluded that the results obtained for this dataset are statistically significant. 
 
 \subsection{Software Implementation}
 
@@ -205,6 +198,7 @@ Outline:
 	\item Tensorflow
 	\item CRC GPUs
 	\item Code available at: GitHub
+	\item Find the CRC thing we have to mention
 \end{itemize}
 
 
@@ -212,23 +206,28 @@ Outline:
 %														Results																       %
 % ============================================================================================================================= %
 \section{Results}
+
+Now that we have shown how we are going to forecast market prices with a RNN, we will now enter the results section where we analyze the effectiveness of RNNs. 
+
 \label{sec:results}
 
-Figures and Tables we will need:
-\begin{itemize}
-	\item Figure: Example of what a price forecast looks like (good and bad).
-	\item Figure: Histogram of error values for all nodes.
-	\item Figure: Histogram of what adding more training data does for testing.
-	\item Figure: Histogram of error values for the single node across the whole year.
-	\item Table: Aggregated statistics of all nodes with low and high amounts of training.
-	\item Table: Aggregated statistics of single node across the year.
-	\item Table: Aggregated statistics on CPU time.
-\end{itemize}
+%Figures and Tables we will need:
+%\begin{itemize}
+%	\item Figure: Example of what a price forecast looks like (good and bad).
+%	\item Figure: Histogram of error values for all nodes.
+%	\item Figure: Histogram of what adding more training data does for testing.
+%	\item Figure: Histogram of error values for the single node across the whole year.
+%	\item Table: Aggregated statistics of all nodes with low and high amounts of training.
+%	\item Table: Aggregated statistics of single node across the year.
+%	\item Table: Aggregated statistics on CPU time.
+%\end{itemize}
+
+It is important to notice that variations in market prices can significantly alter the ability of RNNs to accurately predict DAM prices. Figure \ref{fig:ex_forecast} was constructed by training a RNN with 336 hours of training data, or two weeks. This 336 hour training set was then split into 265 training instances. These instances consisted of one 24 hour input, and the corresponding 24 hour output that would be the next day's market data. Two different forecasts are shown in Figure \ref{fig:ex_forecast} to illustrate how different inputs to the RNN can drastically alter its ability to forecast market prices. In the first plot (top), there is well behaving periodic wave input to the RNN. The output is a forecast that is extremely successful with a small error of only 4.4\%. However, the second plot (bottom) shows that when there is an input that does not as 
 
 \begin{figure}[h]
 \includegraphics[width=0.45\textwidth]{fig_3.png}
 \caption{Example price forecasting using our RNN.}
-\label{fig:ex_prices}
+\label{fig:ex_forecast}
 \end{figure}
 
 \begin{figure}[h]
@@ -245,7 +244,7 @@ Figures and Tables we will need:
 %\label{fig:hist_large}
 %\end{figure}
 
-\begin{table}[]
+\begin{table}[h]
 \begin{tabular}{lll}
 \hline
 Training Data Used & 1 week & 2 weeks \\
@@ -271,7 +270,7 @@ Standard Deviation & 3.13   & N/A    \\
 \label{fig:time_single}
 \end{figure}
 
-\begin{table}[]
+\begin{table}[h]
 \begin{tabular}{llllll}
 \hline
 Quarter & All   & 1    & 2    & 3     & 4     \\
