@@ -1,6 +1,7 @@
 # neural_net_predictions
 Class project for Machine Learning that will use neural networks to forecast energy market prices.
 
+Path to final paper: "tex_writing/proposal_Elmore_Kopp.pdf
 
 ------------------------------------------------------------------------------------------------------------
 Instructions on running neural network code:
