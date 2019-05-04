@@ -210,7 +210,7 @@ error = \frac{1}{7}\sum_{i=0}^{6}\frac{1}{24}\sum_{j=0}^{23}\frac{|p_{i,j}-a_{i,
 
 In the above equation $p_{i,j}$ is the predicted energy price on day i, hour j and $a_{i,j}$ is the actual energy price on day i, hour j.
 
-As a supplemental inquiry, we also investigated forecasting a full year of energy prices for one energy provider. This was done almost identically, except for this study we used 336 input time steps as training to predict 24 hour time step outputs. We performed this calculation 356 times to see how our RNN performs on more long term data. Error was calculated using the same method above except for 365 days instead of 7:
+As a supplemental inquiry, we also investigated forecasting a full year of energy prices for one energy provider. This was done almost identically, except for this study we used 336 input time steps as training to predict 24 hour time step outputs. We performed this calculation 365 times to see how our RNN performs on more long term data. Error was calculated using the same method above except for 365 days instead of 7:
 
 \begin{equation}
 error = \frac{1}{365}\sum_{i=0}^{364}\frac{1}{24}\sum_{j=0}^{23}\frac{|p_{i,j}-a_{i,j}|}{a_{i,j}}
